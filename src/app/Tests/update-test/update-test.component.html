@@ -1,0 +1,54 @@
+<h6>Recorded Tests > Update Test</h6>
+
+<h2>Update Test</h2>
+
+<div class="example-container">
+
+    <form #postForm="ngForm"  (submit)="onUpdateTest(postForm)" >
+        <mat-form-field>
+            <input [value]="currentTest.username" placeholder="Username" required  name="username"  matInput type="text"  >
+       
+        </mat-form-field>
+
+        <mat-form-field>
+            <input placeholder="Patient Passowrd"  [value]="currentTest.password"  name="password" type="password" required  matInput >
+       
+        </mat-form-field>
+
+        <mat-form-field>
+            <input placeholder="Patient Name"  [value]="currentTest.name"  name="name" type="text" required  matInput >
+       
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label  >Patient Type</mat-label>
+            <mat-select required  [(ngModel)]="selectedType" name="type" matInput>
+                <mat-option  value="returnee">Returnee</mat-option>
+                <mat-option value="quarantined">Quarantined</mat-option>
+                <mat-option value="close-contact">Close contact</mat-option>
+                <mat-option value="infected">Infected</mat-option>
+                <mat-option value="suspected">Suspected</mat-option>
+              </mat-select>
+
+        </mat-form-field>
+
+       
+
+        <mat-form-field style="width:100%">
+            <textarea [value]="currentTest.symptoms" placeholder="Symptoms" required   matInput  name="symptoms"rows="6"  ></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Test Result</mat-label>
+            <mat-select [(ngModel)]="testResult" name="result" required  matInput>
+                <mat-option  value="positive">Positive</mat-option>
+                <mat-option value="negative">Negative</mat-option>
+              </mat-select>
+
+        </mat-form-field>
+        <input type="hidden" [value]="currentTest.id"> 
+        <button   mat-raised-button color="primary" type="submit"> Save </button>
+        <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
+        
+    </form>
+</div>

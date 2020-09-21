@@ -1,0 +1,43 @@
+<h6>Recorded Tests > Record New Test</h6>
+
+<h2>Record New Test</h2>
+
+<div class="example-container">
+
+    <form #postForm="ngForm" (submit)="onAddTest(postForm)" >
+        <mat-form-field>
+            <input placeholder="Username" required  #username="ngModel" name="username" matInput type="text" ngModel>
+            <mat-error required *ngIf="username.invalid">*Please enter patient username</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input placeholder="Password" required  #password="ngModel" name="password" matInput type="password" ngModel>
+            <mat-error required *ngIf="username.invalid">*Please enter patient password</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input placeholder="Name" required  #name="ngModel" name="name" matInput type="text" ngModel>
+            <mat-error required *ngIf="username.invalid">*Please enter patient name</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Patient Type</mat-label>
+            <mat-select required [(ngModel)]="selectedType" name="type" matInput>
+                <mat-option value="returnee">Returnee</mat-option>
+                <mat-option value="quarantined">Quarantined</mat-option>
+                <mat-option value="close-contact">Close contact</mat-option>
+                <mat-option value="infected">Infected</mat-option>
+                <mat-option value="suspected">Suspected</mat-option>
+              </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field style="width:100%">
+            <textarea placeholder="Symptoms" required  #content="ngModel" matInput  name="symptoms"rows="6" ngModel ></textarea>
+            <mat-error *ngIf="content.invalid">*Please enter patient symptoms </mat-error>
+        </mat-form-field>
+            <button   mat-raised-button color="primary" type="submit"> Save </button>
+            <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
+            
+    </form>
+    </div>
