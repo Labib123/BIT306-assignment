@@ -22,17 +22,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SidenavComponent } from './sidenav/sidenav.component'
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { HomePageComponent } from './home-page/home-page.component'; 
+import { HomePageComponent } from './home-page/home-page.component';
 import {TestService} from "./Tests/test.service";
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { RecordedTestsComponent } from './Tests/recorded-tests/recorded-tests.component';
-import {MatInputModule} from "@angular/material/input" ; 
+import {MatInputModule} from "@angular/material/input" ;
 import {MatDialogModule} from '@angular/material/dialog';
 import { RecordNewTestComponent } from './Tests/record-new-test/record-new-test.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateTestComponent } from './Tests/update-test/update-test.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import {RecordedTestCentreComponent} from './Tests-centre/recorded-tc/recorded-tc.component';
+import {RecordedTestkitComponent} from './Tests-kit/recorded-testkit/recorded-testkit.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
     RecordNewTestComponent,
     UpdateTestComponent,
     LoginPageComponent,
+    RecordedTestCentreComponent,
+    RecordedTestkitComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,8 +73,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
   { path: '' , component:  HomePageComponent },
   { path: 'recorded-tests' , component: RecordedTestsComponent  },
   { path: 'recorded-new-test' , component: RecordNewTestComponent },
+  { path: 'recorded-test-centre' , component: RecordedTestCentreComponent },
+  { path: 'recorded-test-kit' , component: RecordedTestkitComponent },
 
-  
+
   { path: '**' , component: NotFoundComponent  },
 
     ]),

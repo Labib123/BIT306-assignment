@@ -8,13 +8,22 @@
 
       <a mat-list-item [routerLink]= "'/'">
         <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-        
-        Dashboard 
+
+        Dashboard
       </a>
-      <a mat-list-item [routerLink]="'/recorded-tests'"> 
+      <a mat-list-item [routerLink]="'/recorded-tests'">
         <mat-icon aria-hidden="false" aria-label="Example home icon">grading</mat-icon>
-        
+
         Recorded Tests</a>
+
+      <a mat-list-item [routerLink]="'/recorded-test-centre'">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">local_hospital</mat-icon>
+
+        Test Centre</a>
+      <a mat-list-item [routerLink]="'/recorded-test-kit'">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">view_module</mat-icon>
+
+        Test Kit Stock</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -30,7 +39,7 @@
       <span>CTIS</span>
 
     </mat-toolbar>
-    
+
 
     <!-- Add Content Here -->
     <div style="width:90%; margin:10px">
