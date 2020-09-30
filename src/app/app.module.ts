@@ -24,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import {TestService} from "./Tests/test.service";
+import {TestKService} from "./Tests-kit/testkit.service";
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { RecordedTestsComponent } from './Tests/recorded-tests/recorded-tests.component';
@@ -35,6 +36,8 @@ import { UpdateTestComponent } from './Tests/update-test/update-test.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {RecordedTestCentreComponent} from './Tests-centre/recorded-tc/recorded-tc.component';
 import {RecordedTestkitComponent} from './Tests-kit/recorded-testkit/recorded-testkit.component';
+import {RecordNewTestkitComponent} from './Tests-kit/record-new-testkit/record-new-testkit.component';
+import { UpdateTestkitComponent } from './Tests-kit/update-testkit/update-testkit.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,8 @@ import {RecordedTestkitComponent} from './Tests-kit/recorded-testkit/recorded-te
     LoginPageComponent,
     RecordedTestCentreComponent,
     RecordedTestkitComponent,
+    RecordNewTestkitComponent,
+    UpdateTestkitComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +80,7 @@ import {RecordedTestkitComponent} from './Tests-kit/recorded-testkit/recorded-te
   { path: 'recorded-new-test' , component: RecordNewTestComponent },
   { path: 'recorded-test-centre' , component: RecordedTestCentreComponent },
   { path: 'recorded-test-kit' , component: RecordedTestkitComponent },
+  { path: 'recorded-new-testkit' , component: RecordNewTestkitComponent },
 
 
   { path: '**' , component: NotFoundComponent  },
@@ -84,8 +90,8 @@ import {RecordedTestkitComponent} from './Tests-kit/recorded-testkit/recorded-te
     MatSortModule
 
   ],
-  providers: [TestService],
+  providers: [TestService,TestKService],
   bootstrap: [AppComponent],
-  entryComponents:[RecordNewTestComponent]
+  entryComponents:[RecordNewTestComponent,RecordNewTestkitComponent]
 })
 export class AppModule { }

@@ -1,0 +1,24 @@
+<h6>Test Kit > Update Test Kit</h6>
+
+<h2>Update Test Kit</h2>
+
+<div class="example-container">
+
+    <form #postForm="ngForm"  (submit)="onUpdateTest(postForm)" >
+        <mat-form-field>
+            <input placeholder="Test Kit Name"  [value]="currentTest.name"  name="name" type="text" required  matInput >
+
+        </mat-form-field>
+
+        <mat-form-field>
+            <input placeholder="Test Kit Stock"  [value]="currentTest.stock"  name="stock" type="text" required  matInput >
+
+        </mat-form-field>
+
+
+        <input type="hidden" [value]="currentTest.id">
+        <button   mat-raised-button color="primary" type="submit"> Save </button>
+        <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
+
+    </form>
+</div>

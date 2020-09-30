@@ -1,0 +1,19 @@
+<h6>Test Kit > Record New Test Kit</h6>
+
+<h2>Record New Test Kit</h2>
+
+<div class="example-container">
+
+    <form #postForm="ngForm" (submit)="onAddTest(postForm)" >
+        <mat-form-field>
+            <input placeholder="Name" required  #name="ngModel" name="name" matInput type="text" ngModel>
+            <mat-error required *ngIf="name.invalid">*Please enter Test Kit name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input placeholder="stock" required  #stock="ngModel" matInput  name="stock"rows="6" ngModel >
+            <mat-error *ngIf="stock.invalid">*Please enter patient symptoms </mat-error>
+        </mat-form-field>
+            <button   mat-raised-button color="primary" type="submit"> Save </button>
+            <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
+    </form>
+    </div>
