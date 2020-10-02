@@ -13,7 +13,7 @@ import {UpdateTestkitComponent} from '../update-testkit/update-testkit.component
   styleUrls: ['./recorded-testkit.component.css']
 })
 export class RecordedTestkitComponent implements AfterViewInit{
-  displayedColumns: string[] = ['id', 'name', 'stock', 'avtivity'];
+  displayedColumns: string[] = ['id', 'name', 'stock','activity'];
   dataSource: MatTableDataSource<TestK>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

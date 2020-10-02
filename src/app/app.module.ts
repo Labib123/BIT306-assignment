@@ -38,6 +38,7 @@ import {RecordedTestCentreComponent} from './Tests-centre/recorded-tc/recorded-t
 import {RecordedTestkitComponent} from './Tests-kit/recorded-testkit/recorded-testkit.component';
 import {RecordNewTestkitComponent} from './Tests-kit/record-new-testkit/record-new-testkit.component';
 import { UpdateTestkitComponent } from './Tests-kit/update-testkit/update-testkit.component';
+import { TestHistoryComponent } from './Tests/test-history/test-history.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { UpdateTestkitComponent } from './Tests-kit/update-testkit/update-testki
     RecordedTestkitComponent,
     RecordNewTestkitComponent,
     UpdateTestkitComponent,
+    TestHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +83,9 @@ import { UpdateTestkitComponent } from './Tests-kit/update-testkit/update-testki
   { path: 'recorded-test-centre' , component: RecordedTestCentreComponent },
   { path: 'recorded-test-kit' , component: RecordedTestkitComponent },
   { path: 'recorded-new-testkit' , component: RecordNewTestkitComponent },
+  { path: 'test-history' , component: TestHistoryComponent },
+
+  
 
 
   { path: '**' , component: NotFoundComponent  },

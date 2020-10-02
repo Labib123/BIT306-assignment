@@ -5,21 +5,14 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Test} from "../test.model"
 import {TestService} from '../test.service' ; 
 import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { RecordNewTestComponent} from '../record-new-test/record-new-test.component' ; 
-import {UpdateTestComponent} from '../update-test/update-test.component'
 /** Constants used to fill up our data base. */
-
-
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
 @Component({
-  selector: 'table-overview-example',
-  styleUrls: ['recorded-tests.component.css'],
-  templateUrl: 'recorded-tests.component.html',
+  selector: 'app-test-history',
+  templateUrl: './test-history.component.html',
+  styleUrls: ['./test-history.component.css']
 })
-export class RecordedTestsComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'date', 'type','status','activity'];
+export class TestHistoryComponent implements AfterViewInit {
+  displayedColumns: string[] = ['id', 'name', 'date', 'type','status','result'];
   dataSource: MatTableDataSource<Test>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,22 +25,10 @@ export class RecordedTestsComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource(testsService.getTests() );
   }
 
-  onRecord(){
-      let dialogConfig = new MatDialogConfig() ; 
-      dialogConfig.disableClose = true; 
-      dialogConfig.autoFocus = true; 
-      this.dialog.open(RecordNewTestComponent,dialogConfig) ;
 
+  ngOnInit(): void {
   }
 
-  onUpdate(id){
-    let dialogConfig = new MatDialogConfig() ; 
-    dialogConfig.disableClose = true; 
-    dialogConfig.autoFocus = true; 
-    dialogConfig.data= {id:id} ; 
-    this.dialog.open(UpdateTestComponent,dialogConfig) ;
-
-}
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

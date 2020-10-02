@@ -6,9 +6,9 @@ import{Test} from "./test.model" ;
 })
 export class TestService {
   private tests:Test[] = [
-    {id:1,username:"Labib",password:'test@123',patientType:"Returnee",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:" "},
-    {id:2,username:"Ali",password:'test@123',patientType:"Close Contact",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:" "},
-    {id:3,username:"Fawaz",password:'test@123',patientType:"Returnee",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:" "},
+    {id:1,username:"Labib",password:'test@123',patientType:"Returnee",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:"pending"},
+    {id:2,username:"Ali",password:'test@123',patientType:"Close Contact",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:"pending "},
+    {id:3,username:"Fawaz",password:'test@123',patientType:"Returnee",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:" pending"},
   ]   
   constructor() { 
   }
