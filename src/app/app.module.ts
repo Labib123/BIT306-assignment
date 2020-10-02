@@ -39,6 +39,7 @@ import {RecordedTestkitComponent} from './Tests-kit/recorded-testkit/recorded-te
 import {RecordNewTestkitComponent} from './Tests-kit/record-new-testkit/record-new-testkit.component';
 import { UpdateTestkitComponent } from './Tests-kit/update-testkit/update-testkit.component';
 import { TestHistoryComponent } from './Tests/test-history/test-history.component';
+import { GenerateTestReportComponent } from './Tests/generate-test-report/generate-test-report.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { TestHistoryComponent } from './Tests/test-history/test-history.componen
     RecordNewTestkitComponent,
     UpdateTestkitComponent,
     TestHistoryComponent,
+    GenerateTestReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +86,7 @@ import { TestHistoryComponent } from './Tests/test-history/test-history.componen
   { path: 'recorded-test-kit' , component: RecordedTestkitComponent },
   { path: 'recorded-new-testkit' , component: RecordNewTestkitComponent },
   { path: 'test-history' , component: TestHistoryComponent },
+  { path: 'generate-test-report' , component: GenerateTestReportComponent },
 
   
 
