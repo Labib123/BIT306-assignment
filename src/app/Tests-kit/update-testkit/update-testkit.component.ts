@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TestK} from "../testkit.model";
 import {TestKService} from "../testkit.service";
-import {NgForm} from '@angular/forms'
+import {NgForm} from '@angular/forms';
 
 import { Inject } from '@angular/core';
 @Component({

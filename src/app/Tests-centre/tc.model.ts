@@ -1,3 +1,4 @@
-export interface tc {
-  name:String ,
+export interface TestC {
+  id: number,
+  name:String
 }

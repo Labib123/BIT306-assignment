@@ -1,13 +1,15 @@
-<h2>Record Test Centre</h2>
+<h6>Test Centre > Record New Test Centre</h6>
+
+<h2>Record New Test Centre</h2>
+
 <div class="example-container">
 
-  <form #postForm="ngForm" (submit)="onAddTest(postForm)" >
-      <mat-form-field>
-          <input placeholder="Centre Name" required  #centrename="ngModel" name="centrename" matInput type="text" ngModel>
-          <mat-error required *ngIf="username.invalid">*Please enter The Centre Name</mat-error>
-      </mat-form-field>
-          <button   mat-raised-button color="primary" type="submit"> Submit </button>
-          <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
-
-  </form>
-  </div>
+    <form #postForm="ngForm" (submit)="onAddTest(postForm)" >
+        <mat-form-field>
+            <input placeholder="Name" required  #name="ngModel" name="name" matInput type="text" ngModel>
+            <mat-error required *ngIf="name.invalid">*Please enter Test Centre name</mat-error>
+        </mat-form-field>
+            <button   mat-raised-button color="primary" type="submit"> Save </button>
+            <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
+    </form>
+    </div>

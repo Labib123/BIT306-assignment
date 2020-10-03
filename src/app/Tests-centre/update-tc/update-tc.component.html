@@ -1,0 +1,16 @@
+<h6>Test Centre > Update Test Centre</h6>
+
+<h4>Update Test Centre</h4>
+
+<div class="example-container">
+
+    <form #postForm="ngForm"  (submit)="onUpdateTest(postForm)" >
+        <mat-form-field>
+            <input placeholder="Test Centre Name"  [value]="currentTest.name"  name="name" type="text" required  matInput >
+
+        </mat-form-field>
+        <input type="hidden" [value]="currentTest.id">
+        <button   mat-raised-button color="primary" type="submit"> Save </button>
+        <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
+    </form>
+</div>

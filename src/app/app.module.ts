@@ -25,6 +25,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import {TestService} from "./Tests/test.service";
 import {TestKService} from "./Tests-kit/testkit.service";
+import {TestCService} from "./Tests-centre/tc.service";
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { RecordedTestsComponent } from './Tests/recorded-tests/recorded-tests.component';
@@ -34,13 +35,15 @@ import { RecordNewTestComponent } from './Tests/record-new-test/record-new-test.
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateTestComponent } from './Tests/update-test/update-test.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import {RecordedTestCentreComponent} from './Tests-centre/recorded-tc/recorded-tc.component';
 import {RecordedTestkitComponent} from './Tests-kit/recorded-testkit/recorded-testkit.component';
 import {RecordNewTestkitComponent} from './Tests-kit/record-new-testkit/record-new-testkit.component';
 import { UpdateTestkitComponent } from './Tests-kit/update-testkit/update-testkit.component';
 import { TestHistoryComponent } from './Tests/test-history/test-history.component';
 import { GenerateTestReportComponent } from './Tests/generate-test-report/generate-test-report.component';
 
+import {RecordedTestCentreComponent} from './Tests-centre/recorded-tc/recorded-tc.component';
+import {RecordNewTestCentreComponent} from './Tests-centre/record-new-tc/record-new-tc.component';
+import {UpdateTestCentreComponent} from './Tests-centre/update-tc/update-tc.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +60,8 @@ import { GenerateTestReportComponent } from './Tests/generate-test-report/genera
     UpdateTestkitComponent,
     TestHistoryComponent,
     GenerateTestReportComponent,
+    RecordNewTestCentreComponent,
+    UpdateTestCentreComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,12 +88,13 @@ import { GenerateTestReportComponent } from './Tests/generate-test-report/genera
   { path: 'recorded-tests' , component: RecordedTestsComponent  },
   { path: 'recorded-new-test' , component: RecordNewTestComponent },
   { path: 'recorded-test-centre' , component: RecordedTestCentreComponent },
+  { path: 'recorded-new-centre' , component: RecordNewTestCentreComponent },
   { path: 'recorded-test-kit' , component: RecordedTestkitComponent },
   { path: 'recorded-new-testkit' , component: RecordNewTestkitComponent },
   { path: 'test-history' , component: TestHistoryComponent },
   { path: 'generate-test-report' , component: GenerateTestReportComponent },
 
-  
+
 
 
   { path: '**' , component: NotFoundComponent  },
@@ -98,8 +104,8 @@ import { GenerateTestReportComponent } from './Tests/generate-test-report/genera
     MatSortModule
 
   ],
-  providers: [TestService,TestKService],
+  providers: [TestService,TestKService,TestCService],
   bootstrap: [AppComponent],
-  entryComponents:[RecordNewTestComponent,RecordNewTestkitComponent]
+  entryComponents:[RecordNewTestComponent,RecordNewTestkitComponent,RecordNewTestCentreComponent]
 })
 export class AppModule { }
