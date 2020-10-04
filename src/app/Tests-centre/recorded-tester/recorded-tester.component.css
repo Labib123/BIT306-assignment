@@ -1,0 +1,16 @@
+.middle{
+  margin-top: 100px;
+  margin-left: 50px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+
+td, th {
+  width: 10%;
+}
+
+

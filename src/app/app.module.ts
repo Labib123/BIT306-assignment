@@ -26,6 +26,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import {TestService} from "./Tests/test.service";
 import {TestKService} from "./Tests-kit/testkit.service";
 import {TestCService} from "./Tests-centre/tc.service";
+import {TesterService} from "./Tests-centre/tester.service";
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { RecordedTestsComponent } from './Tests/recorded-tests/recorded-tests.component';
@@ -44,6 +45,9 @@ import { GenerateTestReportComponent } from './Tests/generate-test-report/genera
 import {RecordedTestCentreComponent} from './Tests-centre/recorded-tc/recorded-tc.component';
 import {RecordNewTestCentreComponent} from './Tests-centre/record-new-tc/record-new-tc.component';
 import {UpdateTestCentreComponent} from './Tests-centre/update-tc/update-tc.component';
+
+import{AddTesterComponent} from './Tests-centre/add-tester/add-tester.component';
+import {RecordedTesterComponent} from './Tests-centre/recorded-tester/recorded-tester.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +66,8 @@ import {UpdateTestCentreComponent} from './Tests-centre/update-tc/update-tc.comp
     GenerateTestReportComponent,
     RecordNewTestCentreComponent,
     UpdateTestCentreComponent,
+    AddTesterComponent,
+    RecordedTesterComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,8 +110,8 @@ import {UpdateTestCentreComponent} from './Tests-centre/update-tc/update-tc.comp
     MatSortModule
 
   ],
-  providers: [TestService,TestKService,TestCService],
+  providers: [TestService,TestKService,TestCService,TesterService],
   bootstrap: [AppComponent],
-  entryComponents:[RecordNewTestComponent,RecordNewTestkitComponent,RecordNewTestCentreComponent]
+  entryComponents:[RecordNewTestComponent,RecordNewTestkitComponent,RecordNewTestCentreComponent,AddTesterComponent]
 })
 export class AppModule { }

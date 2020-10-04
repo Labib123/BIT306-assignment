@@ -7,6 +7,8 @@ import {TestC} from "../tc.model";
 import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {RecordNewTestCentreComponent} from '../record-new-tc/record-new-tc.component';
 import {UpdateTestCentreComponent} from '../update-tc/update-tc.component';
+import {AddTesterComponent} from '../add-tester/add-tester.component';
+
 
 @Component({
   selector: 'app-main-tc',
@@ -40,7 +42,13 @@ export class RecordedTestCentreComponent implements AfterViewInit{
     dialogConfig.autoFocus = true;
     dialogConfig.data= {id:id} ;
     this.dialog.open(UpdateTestCentreComponent,dialogConfig) ;
-
+}
+onAddTester(id){
+  let dialogConfig = new MatDialogConfig() ;
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.data= {id:id} ;
+  this.dialog.open(AddTesterComponent,dialogConfig) ;
 }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

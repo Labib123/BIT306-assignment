@@ -1,0 +1,31 @@
+<h6>Test Centre > Add Tester</h6>
+
+<h4>Add Tester</h4>
+
+<div class="example-container">
+
+    <form #postForm="ngForm"  (submit)="onUpdateTest(postForm)" >
+        <mat-form-field>
+            <input placeholder="Test Centre Name"  [value]="currentTest.name"  name="name" type="text" required  matInput disabled>
+        </mat-form-field>
+        <mat-form-field>
+          <input placeholder="Position"  [value]="'Tester'"  name="position" type="text" required  matInput disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input placeholder="Name" required  #name="ngModel" name="tname" matInput type="text" ngModel>
+          <mat-error required *ngIf="name.invalid">*Please enter Name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input placeholder="username" required  #name="ngModel" name="username" matInput type="text" ngModel>
+          <mat-error required *ngIf="name.invalid">*Please enter Username</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input placeholder="password" required  #name="ngModel" name="password" matInput type="text" ngModel>
+          <mat-error required *ngIf="name.invalid">*Please enter Password</mat-error>
+        </mat-form-field>
+        <input type="hidden" [value]="currentTest.id">
+        <button   mat-raised-button color="primary" type="submit"> Save </button>
+        <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
+    </form>
+</div>
