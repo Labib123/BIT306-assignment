@@ -4,7 +4,7 @@
 
 <div class="example-container">
 
-    <form #postForm="ngForm"  (submit)="onUpdateTest(postForm)" >
+    <form #postForm="ngForm"  (submit)="onAddTester(postForm)" >
         <mat-form-field>
             <input placeholder="Test Centre Name"  [value]="currentTest.name"  name="name" type="text" required  matInput disabled>
         </mat-form-field>
