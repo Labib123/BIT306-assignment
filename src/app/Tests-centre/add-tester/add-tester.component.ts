@@ -28,18 +28,11 @@ onCancel(){
   this.dialogRef.close()
 }
 
-onUpdateTest(form:NgForm){
-  if(form.invalid){
-    return;
-  }
-  this.testCService.updateTest(this.currentTest.id, this.currentTest.name)
-   this.dialogRef.close();
-}
 public onAddTester(form:NgForm){
   if(form.invalid){
     return;
   }
-    this.testerService.addTester(form.value.tname,form.value.username,form.value.password,form.value.position,form.value.name)
+    this.testerService.addTester(form.value.tname,form.value.username,form.value.password,form.value.position,form.value.testC)
     console.log(form.value.tname,form.value.username,form.value.password,form.value.position,form.value.name)
   this.dialogRef.close();
 

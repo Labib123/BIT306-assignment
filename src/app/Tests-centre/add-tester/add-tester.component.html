@@ -6,10 +6,10 @@
 
     <form #postForm="ngForm"  (submit)="onAddTester(postForm)" >
         <mat-form-field>
-            <input placeholder="Test Centre Name"  [value]="currentTest.name"  name="name" type="text" required  matInput disabled>
+            <input placeholder="Test Centre Name" [value]="currentTest.name"  name="testC" type="text" required  matInput disabled>
         </mat-form-field>
         <mat-form-field>
-          <input placeholder="Position"  [value]="'Tester'"  name="position" type="text" required  matInput disabled>
+          <input placeholder="Position" [value]="'Tester'"  name="position" type="text" required matInput disabled>
         </mat-form-field>
 
         <mat-form-field>
@@ -24,7 +24,7 @@
           <input placeholder="password" required  #name="ngModel" name="password" matInput type="text" ngModel>
           <mat-error required *ngIf="name.invalid">*Please enter Password</mat-error>
         </mat-form-field>
-        <input type="hidden" [value]="currentTest.id">
+        <input type="hidden" [value]="currentTest.id"><br>
         <button   mat-raised-button color="primary" type="submit"> Save </button>
         <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>
     </form>
