@@ -13,7 +13,7 @@ export class RecordNewTestCentreComponent implements OnInit {
 
 
   constructor(private dialogRef:MatDialogRef<RecordedTestCentreComponent>,private testCService: TestCService) { }
-
+  //Add new test centre to TestCService
   public onAddTest(form:NgForm){
     if(form.invalid){
       return;

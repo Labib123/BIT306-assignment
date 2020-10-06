@@ -28,6 +28,8 @@ export class RecordedTesterComponent implements AfterViewInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
+  //function to open update dialog
   onUpdate(id){
     let dialogConfig = new MatDialogConfig() ;
     dialogConfig.disableClose = true;
@@ -43,6 +45,4 @@ export class RecordedTesterComponent implements AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
-
-
 }

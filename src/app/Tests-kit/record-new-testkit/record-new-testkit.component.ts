@@ -13,7 +13,7 @@ export class RecordNewTestkitComponent implements OnInit {
 
 
   constructor(private dialogRef:MatDialogRef<RecordedTestkitComponent>,private testService: TestKService) { }
-
+  //adding new test kit to testKService
   public onAddTest(form:NgForm){
     if(form.invalid){
       return;
