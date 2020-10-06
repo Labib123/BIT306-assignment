@@ -6,7 +6,7 @@
 
     <form #postForm="ngForm"  (submit)="onAddTester(postForm)" >
         <mat-form-field>
-            <input placeholder="Test Centre Name" [value]="currentTest.name"  name="testC" type="text" required  matInput disabled>
+            <input placeholder="Test Centre Name" [value]="currentTest.name"  name="testC" type="text" required matInput disabled>
         </mat-form-field>
         <mat-form-field>
           <input placeholder="Position" [value]="'Tester'"  name="position" type="text" required matInput disabled>

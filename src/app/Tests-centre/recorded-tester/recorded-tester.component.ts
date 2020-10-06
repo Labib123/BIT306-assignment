@@ -33,7 +33,7 @@ export class RecordedTesterComponent implements AfterViewInit{
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data= {id:id} ;
-    //this.dialog.open(UpdateTestCentreComponent,dialogConfig) ;
+    //this.dialog.open(UpdateTesterComponent,dialogConfig) ;
 }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
