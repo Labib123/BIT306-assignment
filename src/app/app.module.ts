@@ -48,6 +48,12 @@ import {UpdateTestCentreComponent} from './Tests-centre/update-tc/update-tc.comp
 
 import{AddTesterComponent} from './Tests-centre/add-tester/add-tester.component';
 import {RecordedTesterComponent} from './Tests-centre/recorded-tester/recorded-tester.component';
+import { LoginComponent } from './login/login.component';
+
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import {SignupComponent} from './signup/signup.component';
+import {AuthInterceptor} from './auth-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +74,9 @@ import {RecordedTesterComponent} from './Tests-centre/recorded-tester/recorded-t
     UpdateTestCentreComponent,
     AddTesterComponent,
     RecordedTesterComponent,
+    LoginComponent,
+    SignupComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -89,28 +98,13 @@ import {RecordedTesterComponent} from './Tests-centre/recorded-tester/recorded-t
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterModule.forRoot([
-  { path: '' , component:  HomePageComponent },
-  { path: 'recorded-tests' , component: RecordedTestsComponent  },
-  { path: 'recorded-new-test' , component: RecordNewTestComponent },
-  { path: 'recorded-test-centre' , component: RecordedTestCentreComponent },
-  { path: 'recorded-new-centre' , component: RecordNewTestCentreComponent },
-  { path: 'recorded-test-kit' , component: RecordedTestkitComponent },
-  { path: 'recorded-new-testkit' , component: RecordNewTestkitComponent },
-  { path: 'test-history' , component: TestHistoryComponent },
-  { path: 'generate-test-report' , component: GenerateTestReportComponent },
-
-
-
-
-  { path: '**' , component: NotFoundComponent  },
-
-    ]),
+    HttpClientModule,
+    AppRoutingModule,
     MatTableModule,
     MatSortModule
 
   ],
-  providers: [TestService,TestKService,TestCService,TesterService],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},TestService,TestKService,TestCService,TesterService],
   bootstrap: [AppComponent],
   entryComponents:[RecordNewTestComponent,RecordNewTestkitComponent,RecordNewTestCentreComponent,AddTesterComponent]
 })

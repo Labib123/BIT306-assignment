@@ -12,8 +12,11 @@ import { Inject } from '@angular/core';
   styleUrls: ['./add-tester.component.css']
 })
 export class AddTesterComponent implements OnInit {
+
+
   id ;
   currentTest:TestC;
+
   testResult;
   selectedType;
   constructor(   private dialogRef: MatDialogRef<TestC>,  @Inject(MAT_DIALOG_DATA) data,private testCService: TestCService,private testerService: TesterService ) {
@@ -24,7 +27,7 @@ export class AddTesterComponent implements OnInit {
 onCancel(){
   this.dialogRef.close()
 }
-//adding new tester to testerService
+
 public onAddTester(form:NgForm){
   if(form.invalid){
     return;

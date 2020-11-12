@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {AuthService} from '../auth.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,6 +11,8 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent {
+  userIsAuthenticated = false;
+  private authListernerSubs: Subscription;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -16,6 +20,15 @@ export class SidenavComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
-
+  constructor(private authService:AuthService,private breakpointObserver: BreakpointObserver) {}
+  ngOnInit(){
+    this.authListernerSubs = this.authService
+    .getAuthStatusListener()
+    .subscribe(isAuthenticated =>{
+      this.userIsAuthenticated = isAuthenticated;
+    })
+  }
+  onLogout(){
+    this.authService.logout();
+  }
 }
