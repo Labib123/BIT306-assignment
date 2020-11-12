@@ -6,35 +6,48 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
 
-      <a mat-list-item [routerLink]= "'/'">
+      <a mat-list-item [routerLink]= "'/'" *ngIf="userIsAuthenticated">
         <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
 
         Dashboard
       </a>
-      <a mat-list-item [routerLink]="'/recorded-tests'">
+
+      <a mat-list-item [routerLink]="'/recorded-tests'" *ngIf="userIsAuthenticated">
         <mat-icon aria-hidden="false" aria-label="Example home icon">grading</mat-icon>
 
         Recorded Tests</a>
 
-      
-      <a mat-list-item [routerLink]="'/recorded-test-kit'">
+
+      <a mat-list-item [routerLink]="'/recorded-test-kit'" *ngIf="userIsAuthenticated">
         <mat-icon aria-hidden="false" aria-label="Example home icon">view_module</mat-icon>
 
         Test Kit Stock</a>
 
-        <a mat-list-item [routerLink]="'/recorded-test-centre'">
+        <a mat-list-item [routerLink]="'/recorded-test-centre'" *ngIf="userIsAuthenticated">
           <mat-icon aria-hidden="false" aria-label="Example home icon">local_hospital</mat-icon>
-  
+
           Test Centre</a>
-        <a mat-list-item [routerLink]="'/test-history'">
+        <a mat-list-item [routerLink]="'/test-history'" *ngIf="userIsAuthenticated">
           <mat-icon aria-hidden="false" aria-label="Example home icon">history</mat-icon>
-  
+
           View Test History</a>
 
-          <a mat-list-item [routerLink]="'/generate-test-report'">
+          <a mat-list-item [routerLink]="'/generate-test-report'" *ngIf="userIsAuthenticated">
             <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_down</mat-icon>
-    
+
             Generate Test Report   </a>
+          <a mat-list-item [routerLink]="'/login'" *ngIf="!userIsAuthenticated">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_up</mat-icon>
+
+            Login   </a>
+          <a mat-list-item [routerLink]="'/signup'" *ngIf="!userIsAuthenticated">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_up</mat-icon>
+
+            Signup   </a>
+          <a mat-list-item (click)="onLogout()" *ngIf="userIsAuthenticated">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_up</mat-icon>
+
+            Logout   </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -50,7 +63,6 @@
       <span>CTIS</span>
       <span class="example-spacer"></span>
       <span>Username</span>
-
     </mat-toolbar>
 
 

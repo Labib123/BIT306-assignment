@@ -27,7 +27,7 @@ export class RecordedTestCentreComponent implements AfterViewInit{
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(testsCService.getTests() );
   }
-  //function to open record dialog
+
   onRecord(){
       let dialogConfig = new MatDialogConfig() ;
       dialogConfig.disableClose = true;
@@ -35,7 +35,7 @@ export class RecordedTestCentreComponent implements AfterViewInit{
       this.dialog.open(RecordNewTestCentreComponent,dialogConfig) ;
 
   }
-  //function to open update dialog
+
   onUpdate(id){
     let dialogConfig = new MatDialogConfig() ;
     dialogConfig.disableClose = true;
@@ -43,7 +43,6 @@ export class RecordedTestCentreComponent implements AfterViewInit{
     dialogConfig.data= {id:id} ;
     this.dialog.open(UpdateTestCentreComponent,dialogConfig) ;
 }
-// function to open add tester dialog
 onAddTester(id){
   let dialogConfig = new MatDialogConfig() ;
   dialogConfig.disableClose = true;
@@ -64,4 +63,6 @@ onAddTester(id){
       this.dataSource.paginator.firstPage();
     }
   }
+
+
 }
