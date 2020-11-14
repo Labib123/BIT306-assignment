@@ -40,6 +40,6 @@ export class AuthService{
   logout(){
     this.token=null;
     this.authStatusListener.next(false);
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 }
