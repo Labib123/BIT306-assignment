@@ -62,7 +62,7 @@
       </button>
       <span>CTIS</span>
       <span class="example-spacer"></span>
-      <span>{{userType}}</span>
+      <span *ngIf="userIsAuthenticated">{{userType}}</span>
     </mat-toolbar>
 
 
