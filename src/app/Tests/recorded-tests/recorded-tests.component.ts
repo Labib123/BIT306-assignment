@@ -7,6 +7,8 @@ import {TestService} from '../test.service' ;
 import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { RecordNewTestComponent} from '../record-new-test/record-new-test.component' ; 
 import {UpdateTestComponent} from '../update-test/update-test.component'
+import {AuthService} from   '../../auth.service' ;
+
 /** Constants used to fill up our data base. */
 
 
@@ -21,15 +23,15 @@ import {UpdateTestComponent} from '../update-test/update-test.component'
 export class RecordedTestsComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'type','status','activity'];
   dataSource: MatTableDataSource<Test>;
+  private tests = [] ; 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private testsService: TestService, private dialog:MatDialog) {
-    // Create 100 users
+  constructor(private testsService: TestService, private dialog:MatDialog,private authService:AuthService) {
+    console.log(authService.email) 
+  //  this.dataSource = new MatTableDataSource( this.testsService.getTests());
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(testsService.getTests() );
   }
 
   onRecord(){

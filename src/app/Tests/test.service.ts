@@ -1,36 +1,42 @@
 import { Injectable } from '@angular/core';
 import{Test} from "./test.model" ; 
-
+import { HttpClientModule }  from '@angular/common/http';
+import {Router} from '@angular/router'
+import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../auth.service';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class TestService {
-  private tests:Test[] = [
-    {id:1,username:"Labib",password:'test@123',patientType:"Returnee",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:"pending"},
-    {id:2,username:"Ali",password:'test@123',patientType:"Close Contact",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:"pending "},
-    {id:3,username:"Fawaz",password:'test@123',patientType:"Returnee",symptoms:'cold',date:new Date("2020-01-16"),resultDate:new Date("2020-01-16"),status:"pendind",name:"test",result:" pending"},
-  ]   
-  constructor() { 
+  private tests:Test[] = [] ;  
+   
+  constructor(private http: HttpClient,private router:Router,public authService:AuthService) { 
   }
- 
-  public  getTests():Test[] { 
-    return this.tests; 
-    }
+  private BACKEND_URL = "http://localhost:3000/api"
+  private jsonObject = {};  
 
-    public  getTest(id):Test {
-      let currentPost ; 
-        this.tests.forEach(function(test){
-          if(test.id === id) {
-            currentPost = test; 
-          }
-        })
-        return currentPost;
-    }
-  public addTest(username,password,name,patientType,symptoms)  {
-    let lastElementId = this.tests[this.tests.length-1].id; 
-
-    let test:Test  = {username:username,password:password,name:name,patientType:patientType,symptoms:symptoms,id:lastElementId+1,date:new Date(),status:"pending",result:"",resultDate:new Date()}
-    this.tests.push(test); 
+  public  getTests() {
+        
+       this.http.get<[]>("http://localhost:3000/api/tester/tests").subscribe(
+        response => {
+        this.tests =  response; 
+  
+        },
+        error => {
+          console.log(error);
+        });
+    
+  }
+    
+    
+  public addTest(testerId,date,status,userId,patientType,symptoms)  {
+    const testData = {testerId,symptoms:symptoms, date:date, status:status,userId:userId,patientType:patientType};
+    console.log(testData)
+    this.http.post('http://localhost:3000/api/tests/add', testData)
+    .subscribe(response =>{
+      console.log(response);
+    });
   }     
   public updateTest(id,username,password,name,patientType,symptoms,result){
     this.tests.forEach(function(test){

@@ -1,5 +1,23 @@
 <mat-card>
   <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
+
+
+    <mat-form-field>
+
+  <input
+  matInput
+  type="name"
+  name="name"
+  placeholder="Name"
+  #nameInput = "ngModel"
+  ngModel
+  required
+  >
+  <mat-error *ngIf="nameInput.invalid"> Please enter valid Name</mat-error>
+  </mat-form-field>
+  
+
+
 <mat-form-field>
 
 <input
@@ -14,6 +32,9 @@ email>
 <mat-error *ngIf="emailInput.invalid"> Please enter valid E-mail</mat-error>
 </mat-form-field>
 
+
+
+
 <mat-form-field>
 
   <input
@@ -26,11 +47,12 @@ email>
   required>
   <mat-error *ngIf="passwordInput.invalid"> Please enter valid Password</mat-error>
   </mat-form-field>
-
   <select id="position" name="position" ngModel>
     <option value="manager">Manager</option>
-    <option value="officer">Officer</option>
+    <option value="manager">Manager</option>
+    <option value="tester">tester</option>
   </select><br>
+ <br>
 <button
 mat-raised-button
 color="accent"

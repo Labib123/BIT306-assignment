@@ -5,9 +5,13 @@ const TestK = require('./models/testk')
 const mongoose = require ("mongoose");
 const bcrypt = require("bcrypt");
 const User = require ('./models/user');
+const Test = require ('./models/test.model');
+
+const idAutoIncrement = require("id-auto-increment");
 app.use(bodyParser.json());
 const jwt= require('jsonwebtoken');
-const checkAuth = require ('./middleware/check-Auth');
+const checkAuth = require ('./middleware/check-auth');
+const port = 3000
 
 mongoose.connect('mongodb+srv://max:Ln9VkJiSr9eEDIZS@cluster0.xage5.mongodb.net/node-angular?retryWrites=true&w=majority')
   .then(() =>{
@@ -66,6 +70,7 @@ app.post('/api/user/signup',(req,res,next)=>{
   .then(hash =>{
     const user = new User({
       email: req.body.email,
+      name: req.body.name,
       password: hash,
       position: req.body.position
     });
@@ -117,4 +122,77 @@ app.post('/api/user/login',(req,res,next)=>{
       });
     })
 });
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
+
+
+
+//test CRUD operations 
+
+app.post("/api/tests/add",(req, res, next) => {
+  const test = new Test({
+    testerId: req.body.testerId,
+      date: req.body.date,
+      status: "pending",
+      userId: req.body.userId,
+      patientType: req.body.patientType,
+      symptoms: req.body.symptoms,
+  })
+  test.save().
+      then(test => {
+          if(test){
+              res.status(201).json({
+                  message: "Test added successfully",
+      
+              })
+          }
+  }).catch(e => {
+          console.log(e)
+      })
+})
+
+
+app.get("/api/patient/test",(req, res, next) => {
+  Test.find({userId: req.query.userId}, function(err, tests) {
+    var testMap = {};
+
+    tests.forEach(function(test) {
+      testMap[test._id] = test;
+    });
+
+    res.send(testMap);  
+  });
+})
+
+app.get("/api/tester/tests",(req, res, next) => {
+  Test.find({testerId: req.query.testerId}, function(err, tests) {
+    var testMap = {};
+
+    tests.forEach(function(test) {
+      testMap[test._id] = test;
+    });
+
+    res.send(testMap);  
+  });
+})
+
+app.get("/api/tests",(req, res, next) => {
+  Test.find({}, function(err, tests) {
+    var testMap = {};
+
+    tests.forEach(function(test) {
+      testMap[test._id] = test;
+    });
+
+    res.send(testMap);  
+  });
+})
+
+app.get("/api/testing",(req, res, next) => {
+  
+  console.log()
+})
+
+
 module.exports = app;

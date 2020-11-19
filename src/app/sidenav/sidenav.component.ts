@@ -12,6 +12,13 @@ import {Subscription} from 'rxjs';
 })
 export class SidenavComponent {
   userIsAuthenticated = false;
+  userType:string ; 
+  isOfficer:boolean; 
+  isManager:boolean;
+  isTester:boolean;
+  isPatient:boolean; 
+
+ 
   private authListernerSubs: Subscription;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -26,6 +33,14 @@ export class SidenavComponent {
     .getAuthStatusListener()
     .subscribe(isAuthenticated =>{
       this.userIsAuthenticated = isAuthenticated;
+      console.log(this.authService.userType);
+      this.userType = this.authService.userType;
+      this.isOfficer = this.authService.userType.toUpperCase() === "officer".toUpperCase() ;  
+      this.isManager = this.authService.userType.toUpperCase() === "manager".toUpperCase() ;      
+      this.isTester = this.authService.userType.toUpperCase() === "tester".toUpperCase() ;      
+      this.isPatient = this.authService.userType.toUpperCase() === "patient".toUpperCase() ;      
+    
+      console.log(this.userType)
     })
   }
   onLogout(){

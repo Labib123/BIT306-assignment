@@ -28,7 +28,7 @@ export class GenerateTestReportComponent implements  AfterViewInit {
     // Create 100 users
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(testsService.getTests() );
+    //this.dataSource = new MatTableDataSource(testsService.getTests() );
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

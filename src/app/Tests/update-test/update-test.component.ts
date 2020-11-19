@@ -19,7 +19,7 @@ export class UpdateTestComponent implements OnInit {
   selectedType;
   constructor(   private dialogRef: MatDialogRef<Test>,  @Inject(MAT_DIALOG_DATA) data,private testService: TestService ) {
     this.id = data.id;
-    this.currentTest= this.testService.getTest(this.id); 
+  // this.currentTest= this.testService.getTest(this.id); 
     
 
 }

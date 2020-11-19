@@ -6,18 +6,18 @@
 
     <form #postForm="ngForm" (submit)="onAddTest(postForm)" >
         <mat-form-field>
-            <input placeholder="Username" required  #username="ngModel" name="username" matInput type="text" ngModel>
-            <mat-error required *ngIf="username.invalid">*Please enter patient username</mat-error>
+            <input placeholder="Email" required  #email="ngModel" name="email" matInput type="email" ngModel>
+            <mat-error required *ngIf="email.invalid">*Please enter patient email</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <input placeholder="Password" required  #password="ngModel" name="password" matInput type="password" ngModel>
-            <mat-error required *ngIf="username.invalid">*Please enter patient password</mat-error>
+            <mat-error required *ngIf="password.invalid">*Please enter patient password</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <input placeholder="Name" required  #name="ngModel" name="name" matInput type="text" ngModel>
-            <mat-error required *ngIf="username.invalid">*Please enter patient name</mat-error>
+            <mat-error required *ngIf="name.invalid">*Please enter patient name</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -33,8 +33,8 @@
         </mat-form-field>
 
         <mat-form-field style="width:100%">
-            <textarea placeholder="Symptoms" required  #content="ngModel" matInput  name="symptoms"rows="6" ngModel ></textarea>
-            <mat-error *ngIf="content.invalid">*Please enter patient symptoms </mat-error>
+            <textarea placeholder="Symptoms" required  #symptoms="ngModel" matInput  name="symptoms"rows="6" ngModel ></textarea>
+            <mat-error *ngIf="symptoms.invalid">*Please enter patient symptoms </mat-error>
         </mat-form-field>
             <button   mat-raised-button color="primary" type="submit"> Save </button>
             <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>

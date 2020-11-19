@@ -3,10 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {AuthData} from './auth-data.model';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
+import jwt_decode from "jwt-decode";
 
 @Injectable ({providedIn:'root'})
 export class AuthService{
   private token:string;
+  public email:string ;
+  public userType:string = "" ; 
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http:HttpClient, private router:Router){}
@@ -17,9 +20,17 @@ export class AuthService{
   getAuthStatusListener(){
     return this.authStatusListener.asObservable();
   }
+   getCurrentUser() {
+    try {
+      const jwt = localStorage.getItem(this.token);
+      return jwt_decode(jwt);
+    } catch (ex) {
+      return null;
+    }
+  }
 
-  createUser(email:string, password:string, position:string){
-    const authData:AuthData = {email:email, password:password, position:position};
+  createUser(name:string,email:string, password:string, position:string){
+    const authData:AuthData = {name:name,email:email, password:password, position:position};
     this.http.post('http://localhost:3000/api/user/signup', authData)
       .subscribe(response =>{
         console.log(response);
@@ -28,10 +39,13 @@ export class AuthService{
 
   login(email: string, password: string){
     const authData = {email:email, password:password};
-    this.http.post<{token:string}>('http://localhost:3000/api/user/login',authData)
+    this.http.post<{token:string, message:any}>('http://localhost:3000/api/user/login',authData)
     .subscribe(response => {
       const token = response.token;
       this.token= token;
+      this.email = authData.email;
+      this.userType = response.message.position ; 
+
       this.authStatusListener.next(true);
       this.router.navigate(['/']);
       console.log(response);
