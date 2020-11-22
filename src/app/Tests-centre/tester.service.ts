@@ -1,45 +1,68 @@
 import { Injectable } from '@angular/core';
 import{Tester} from "./tester.model" ;
+import {HttpClient} from '@angular/common/http';
+import { Subject } from 'rxjs';
+import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TesterService {
-  private testers:Tester[] = [
-    {id: 1, name: 'Will', username: 'will', password:'will',position:'Tester', testC:'Damansara'},
-    {id: 1, name: 'Dan', username: 'Dan', password:'Dan',position:'Tester', testC:'Puchong'},
-    {id: 1, name: 'Tan', username: 'Tan', password:'Tan',position:'Tester', testC:'Sunway'},
-  ]
-  constructor() {
+  private tester:Tester[] = [];
+    //{id: 1, name: 'Will', username: 'will', password:'will',position:'Tester', testC:'Damansara'},
+    //{id: 1, name: 'Dan', username: 'Dan', password:'Dan',position:'Tester', testC:'Puchong'},
+    //{id: 1, name: 'Tan', username: 'Tan', password:'Tan',position:'Tester', testC:'Sunway'},
+  //]
+  constructor(private http: HttpClient, private router:Router) {
   }
+  usertype:string;
 
-  public  getTesters():Tester[] {
-    return this.testers;
+  private postsUpdated = new Subject<Tester[]>();
+  public  getTesters(){
+    this.http.get<{message: string, tester: any}>('http://localhost:3000/api/tester')
+      .pipe(map((postData) => {
+        return postData.tester.map(tester => {
+          return{
+            name:tester.name,
+            id:tester._id,
+            position:tester.position,
+            testCentre:tester.testCentre,
+            email:tester.email
+          };
+        });
+      }))
+      .subscribe(transformedPosts =>{
+        this.tester = transformedPosts;
+        this.postsUpdated.next([...this.tester]);
+      })
+      return this.tester;
     }
-
+    getPostUpdateListener(){
+      return this.postsUpdated.asObservable();
+    }
     public  getTester(id):Tester {
       let currentPost ;
-        this.testers.forEach(function(testC){
+        this.tester.forEach(function(testC){
           if(testC.id === id) {
             currentPost = testC;
           }
         })
         return currentPost;
     }
-  public addTester(name,username,password,position,testC)  {
-    let lastElementId = this.testers[this.testers.length-1].id;
-
-    let tester:Tester  = {name:name,username:username,password:password,position:position,testC:testC,id:lastElementId+1}
-    this.testers.push(tester);
+  public addTester(name,email,password,position,testCentre)  {
+    const tester:Tester = {id:null,name:name,email:email, password:password, position:position, testCentre:testCentre};
+    this.http.post('http://localhost:3000/api/tester/signup', tester)
+      .subscribe(response =>{
+        console.log(response);
+      });
   }
-  public updateTester(id,name,username,password){
-    this.testers.forEach(function(tester){
-      if(tester.id === id) {
-        tester.name = name ;
-        tester.username = username ;
-        tester.password = password ;
-      }
-    })
+  deleteTester(id:String){
+    this.http.delete('http://localhost:3000/api/tester/'+id)
+    .subscribe(() => {
+      console.log("Tester Deleted!");
+    });
+    this.router.navigate(['/']);
   }
 
 

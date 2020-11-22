@@ -20,8 +20,6 @@ export class UpdateTestkitComponent implements OnInit {
   constructor(   private dialogRef: MatDialogRef<TestK>,  @Inject(MAT_DIALOG_DATA) data,private testService: TestKService ) {
     this.id = data.id;
     this.currentTest= this.testService.getTest(this.id);
-
-
 }
 
 
@@ -35,7 +33,7 @@ onUpdateTest(form:NgForm){
   if(form.invalid){
     return;
   }
-  this.testService.updateTest(this.currentTest.id, this.currentTest.name,this.currentTest.stock)
+  this.testService.updateTest(this.currentTest.id, form.value.name,form.value.stock)
    this.dialogRef.close();
 }
 

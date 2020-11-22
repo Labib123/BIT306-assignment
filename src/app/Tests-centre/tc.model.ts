@@ -1,4 +1,4 @@
 export interface TestC {
-  id: number,
+  id: String,
   name:String
 }

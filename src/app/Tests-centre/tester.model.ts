@@ -1,8 +1,8 @@
 export interface Tester {
-  id: number,
+  id: String,
   name:String,
-  username:String,
+  email:String,
   password:String,
   position:String,
-  testC:String,
+  testCentre:String,
 }

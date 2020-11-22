@@ -6,7 +6,7 @@ const mongoose = require ("mongoose");
 const bcrypt = require("bcrypt");
 const User = require ('./models/user');
 const Test = require ('./models/test.model');
-
+const TestC = require('./models/testc');
 const idAutoIncrement = require("id-auto-increment");
 app.use(bodyParser.json());
 const jwt= require('jsonwebtoken');
@@ -28,6 +28,87 @@ app.use((req,res,next)=>{
   next();
 })
 
+//Tester
+app.post('/api/tester/signup',(req,res,next)=>{
+  bcrypt.hash(req.body.password, 10)
+  .then(hash =>{
+    const user = new User({
+      email: req.body.email,
+      name: req.body.name,
+      password: hash,
+      position: req.body.position,
+      testCentre: req.body.testCentre
+    });
+    user.save()
+    .then(result =>{
+      res.status(201).json({
+        message:'Tester Created',
+        result:result
+      });
+    })
+    .catch(err =>{
+      res.status(500).json({
+        error:err
+      });
+    });
+  });
+});
+app.get('/api/tester',(req,res,next)=>{
+
+    User.find().then(document => {
+      res.status(200).json({
+        message: 'Tester fetched successfully',
+        tester:document
+      });
+    });
+
+});
+app.delete('/api/tester/:id',checkAuth,(req,res,next)=>{
+  User.deleteOne({_id:req.params.id}).then(result => {
+    console.log(result);
+    res.status(200).json({message:"Tester Deleted!"});
+  })
+});
+
+//TestCentre
+app.post('/api/testsC',checkAuth,(req,res,next)=>{
+  //const testK  = req.body;
+  const testC  = new TestC({
+    name: req.body.name
+  });
+  testC.save();
+  console.log(testC);
+  res.status(201).json({
+    message: 'Test Centre Added successfully'
+  });
+});
+
+app.get('/api/testsC',(req,res,next)=>{
+  TestC.find().then(document => {
+    res.status(200).json({
+      message: 'Test Centre fetched successfully',
+      testsC:document
+    });
+  });
+});
+app.delete('/api/testsC/:id',checkAuth,(req,res,next)=>{
+  TestC.deleteOne({_id:req.params.id}).then(result => {
+    console.log(result);
+    res.status(200).json({message:"Test Centre Deleted!"});
+  })
+});
+app.put('/api/testsC/:id',checkAuth,(req,res,next)=>{
+  const testC = new TestC({
+    _id:req.body.id,
+    name:req.body.name
+  });
+  testC.updateOne({_id: req.params.id}, testC).then(result => {
+    console.log(result);
+    res.status(200).json({message: "Update Successful!"});
+  });
+});
+
+//TestKit
 app.post('/api/testsK',checkAuth,(req,res,next)=>{
   //const testK  = req.body;
   const testK  = new TestK({
@@ -65,6 +146,8 @@ app.put('/api/testsK/:id',checkAuth,(req,res,next)=>{
     res.status(200).json({message: "Update Successful!"});
   });
 });
+
+//Login SignUp
 app.post('/api/user/signup',(req,res,next)=>{
   bcrypt.hash(req.body.password, 10)
   .then(hash =>{
@@ -128,7 +211,7 @@ app.listen(port, () => {
 
 
 
-//test CRUD operations 
+//test CRUD operations
 
 app.post("/api/tests/add",(req, res, next) => {
   const test = new Test({
@@ -144,7 +227,7 @@ app.post("/api/tests/add",(req, res, next) => {
           if(test){
               res.status(201).json({
                   message: "Test added successfully",
-      
+
               })
           }
   }).catch(e => {
@@ -161,7 +244,7 @@ app.get("/api/patient/test",(req, res, next) => {
       testMap[test._id] = test;
     });
 
-    res.send(testMap);  
+    res.send(testMap);
   });
 })
 
@@ -173,7 +256,7 @@ app.get("/api/tester/tests",(req, res, next) => {
       testMap[test._id] = test;
     });
 
-    res.send(testMap);  
+    res.send(testMap);
   });
 })
 
@@ -185,12 +268,12 @@ app.get("/api/tests",(req, res, next) => {
       testMap[test._id] = test;
     });
 
-    res.send(testMap);  
+    res.send(testMap);
   });
 })
 
 app.get("/api/testing",(req, res, next) => {
-  
+
   console.log()
 })
 

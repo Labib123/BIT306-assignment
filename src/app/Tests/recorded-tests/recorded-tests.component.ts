@@ -3,9 +3,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Test} from "../test.model"
-import {TestService} from '../test.service' ; 
+import {TestService} from '../test.service' ;
 import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { RecordNewTestComponent} from '../record-new-test/record-new-test.component' ; 
+import { RecordNewTestComponent} from '../record-new-test/record-new-test.component' ;
 import {UpdateTestComponent} from '../update-test/update-test.component'
 import {AuthService} from   '../../auth.service' ;
 
@@ -23,30 +23,30 @@ import {AuthService} from   '../../auth.service' ;
 export class RecordedTestsComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'type','status','activity'];
   dataSource: MatTableDataSource<Test>;
-  private tests = [] ; 
+  private tests = [] ;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private testsService: TestService, private dialog:MatDialog,private authService:AuthService) {
-    console.log(authService.email) 
+    console.log(authService.email)
   //  this.dataSource = new MatTableDataSource( this.testsService.getTests());
 
   }
 
   onRecord(){
-      let dialogConfig = new MatDialogConfig() ; 
-      dialogConfig.disableClose = true; 
-      dialogConfig.autoFocus = true; 
+      let dialogConfig = new MatDialogConfig() ;
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
       this.dialog.open(RecordNewTestComponent,dialogConfig) ;
 
   }
 
   onUpdate(id){
-    let dialogConfig = new MatDialogConfig() ; 
-    dialogConfig.disableClose = true; 
-    dialogConfig.autoFocus = true; 
-    dialogConfig.data= {id:id} ; 
+    let dialogConfig = new MatDialogConfig() ;
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data= {id:id} ;
     this.dialog.open(UpdateTestComponent,dialogConfig) ;
 
 }

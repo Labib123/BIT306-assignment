@@ -20,7 +20,7 @@ export class RecordNewTestCentreComponent implements OnInit {
     }
       this.testCService.addTest(form.value.name)
       console.log(form.value.name)
-    this.dialogRef.close();
+      this.dialogRef.close();
 
       // this.postService.addPosts(form.value.title , form.value.content)
 

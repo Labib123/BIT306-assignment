@@ -3,7 +3,7 @@ import{TestK} from "./testkit.model" ;
 import {HttpClient} from '@angular/common/http';
 import { Subject } from 'rxjs';
 import {map} from 'rxjs/operators';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -48,7 +48,7 @@ export class TestKService {
       return currentPost;
     }
   public addTest(name,stock)  {
-    let lastElementId = this.testsK[this.testsK.length-1].id;
+    //let lastElementId = this.testsK[this.testsK.length-1].id;
     //let testK:TestK  = {name:name,stock:stock,id:lastElementId+1,}
     //this.testsK.push(testK);
     const testK:TestK = {id:null,name:name, stock:stock};
@@ -66,13 +66,14 @@ export class TestKService {
     this.http.put('http://localhost:3000/api/testsK/'+ id, testK)
     .subscribe(response => {
       console.log(response);
+      console.log(testK);
       this.router.navigate(['/']);
     });
   }
   deleteTestK(id:String){
     this.http.delete('http://localhost:3000/api/testsK/'+id)
     .subscribe(() => {
-      console.log("Deleted!");
+      console.log("Test Kit Deleted!");
     });
   }
 

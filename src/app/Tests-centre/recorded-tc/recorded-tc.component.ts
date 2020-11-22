@@ -16,7 +16,7 @@ import {AddTesterComponent} from '../add-tester/add-tester.component';
   styleUrls: ['./recorded-tc.component.css']
 })
 export class RecordedTestCentreComponent implements AfterViewInit{
-  displayedColumns: string[] = ['id', 'name', 'activity'];
+  displayedColumns: string[] = ['name', 'activity'];
   dataSource: MatTableDataSource<TestC>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,7 +33,6 @@ export class RecordedTestCentreComponent implements AfterViewInit{
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       this.dialog.open(RecordNewTestCentreComponent,dialogConfig) ;
-
   }
 
   onUpdate(id){
@@ -42,6 +41,9 @@ export class RecordedTestCentreComponent implements AfterViewInit{
     dialogConfig.autoFocus = true;
     dialogConfig.data= {id:id} ;
     this.dialog.open(UpdateTestCentreComponent,dialogConfig) ;
+}
+onDeleteTc(id: String){
+  this.testsCService.deleteTestC(id);
 }
 onAddTester(id){
   let dialogConfig = new MatDialogConfig() ;

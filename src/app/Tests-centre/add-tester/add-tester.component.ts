@@ -19,7 +19,7 @@ export class AddTesterComponent implements OnInit {
 
   testResult;
   selectedType;
-  constructor(   private dialogRef: MatDialogRef<TestC>,  @Inject(MAT_DIALOG_DATA) data,private testCService: TestCService,private testerService: TesterService ) {
+  constructor( private dialogRef: MatDialogRef<TestC>,  @Inject(MAT_DIALOG_DATA) data,private testCService: TestCService,private testerService: TesterService ) {
     this.id = data.id;
     this.currentTest= this.testCService.getTest(this.id);
 }
@@ -32,9 +32,9 @@ public onAddTester(form:NgForm){
   if(form.invalid){
     return;
   }
-    this.testerService.addTester(form.value.tname,form.value.username,form.value.password,form.value.position,form.value.testC)
-    console.log(form.value.tname,form.value.username,form.value.password,form.value.position,form.value.name)
-  this.dialogRef.close();
+    this.testerService.addTester(form.value.name,form.value.email,form.value.password,form.value.position,form.value.testCentre);
+    console.log(form.value);
+    this.dialogRef.close();
 
     // this.postService.addPosts(form.value.title , form.value.content)
 

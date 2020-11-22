@@ -5,21 +5,22 @@
 <div class="example-container">
 
     <form #postForm="ngForm"  (submit)="onAddTester(postForm)" >
-        <mat-form-field>
-            <input placeholder="Test Centre Name" [value]="currentTest.name"  name="testC" type="text" required  matInput disabled>
+        <mat-form-field hidden>
+            <input placeholder="Test Centre Name" [ngModel]="currentTest.name"  name="testCentre" type="text" required  ngModel matInput hidden >
         </mat-form-field>
-        <mat-form-field>
-          <input placeholder="Position" [value]="'Tester'"  name="position" type="text" required matInput disabled>
+        <mat-form-field hidden>
+          <input placeholder="Position" [ngModel]="'tester'"  name="position" type="text" ngModel required matInput hidden>
         </mat-form-field>
 
         <mat-form-field>
-          <input placeholder="Name" required  #name="ngModel" name="tname" matInput type="text" ngModel>
+          <input placeholder="Name" required  #name="ngModel" name="name" matInput type="text" ngModel>
           <mat-error required *ngIf="name.invalid">*Please enter Name</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input placeholder="username" required  #name="ngModel" name="username" matInput type="text" ngModel>
-          <mat-error required *ngIf="name.invalid">*Please enter Username</mat-error>
+          <input matInput type="email" name="email" placeholder="E-mail" #emailInput = "ngModel" ngModel required email>
+          <mat-error *ngIf="emailInput.invalid"> Please enter valid E-mail</mat-error>
         </mat-form-field>
+
         <mat-form-field>
           <input placeholder="password" required  #name="ngModel" name="password" matInput type="text" ngModel>
           <mat-error required *ngIf="name.invalid">*Please enter Password</mat-error>
