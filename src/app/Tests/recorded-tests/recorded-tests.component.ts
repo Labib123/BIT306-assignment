@@ -24,13 +24,13 @@ export class RecordedTestsComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'type','status','activity'];
   dataSource: MatTableDataSource<Test>;
   private tests = [] ;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   constructor(private testsService: TestService, private dialog:MatDialog,private authService:AuthService) {
     console.log(authService.email)
-    //this.dataSource = new MatTableDataSource( this.testsService.getTests());
+    this.dataSource = new MatTableDataSource( this.testsService.getTests());
 
   }
 

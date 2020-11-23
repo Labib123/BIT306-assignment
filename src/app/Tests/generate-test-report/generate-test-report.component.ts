@@ -3,7 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Test} from "../test.model"
-import {TestService} from '../test.service' ; 
+import {TestService} from '../test.service' ;
 import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -15,9 +15,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class GenerateTestReportComponent implements  AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'type','status','activity'];
   dataSource: MatTableDataSource<Test>;
-  fileUrl; 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  fileUrl;
+
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   ngOnInit() {
     const data = 'some text';
     const blob = new Blob([data], { type: 'application/octet-stream' });
@@ -28,7 +30,7 @@ export class GenerateTestReportComponent implements  AfterViewInit {
     // Create 100 users
 
     // Assign the data to the data source for the table to render
-    //this.dataSource = new MatTableDataSource(testsService.getTests() );
+    this.dataSource = new MatTableDataSource(testsService.getTests() );
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

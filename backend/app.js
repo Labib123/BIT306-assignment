@@ -55,7 +55,7 @@ app.post('/api/tester/signup',checkAuth,(req,res,next)=>{
 });
 app.get('/api/tester',checkAuth,(req,res,next)=>{
 
-    User.find().then(document => {
+    User.find({position: 'tester'}).then(document => {
       res.status(200).json({
         message: 'Tester fetched successfully',
         tester:document
@@ -249,14 +249,20 @@ app.get("/api/patient/test",(req, res, next) => {
 })
 
 app.get("/api/tester/tests",(req, res, next) => {
-  Test.find({testerId: req.query.testerId}, function(err, tests) {
-    var testMap = {};
+  //Test.find({testerId: req.query.testerId}, function(err, tests) {
+    //var testMap = {};
 
-    tests.forEach(function(test) {
-      testMap[test._id] = test;
+    //tests.forEach(function(test) {
+      //testMap[test._id] = test;
+    //});
+
+    //res.send(testMap);
+  //});
+  Test.find({testerId: req.query.testerId}).then(document => {
+    res.status(200).json({
+      message: 'Test fetched successfully',
+      tests:document
     });
-
-    res.send(testMap);
   });
 })
 
