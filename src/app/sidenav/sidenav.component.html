@@ -12,27 +12,27 @@
         Dashboard
       </a>
 
-      <a mat-list-item [routerLink]="'/recorded-tests'" *ngIf="isTester">
+      <a mat-list-item [routerLink]="'/recorded-tests'" *ngIf="isTester&&userIsAuthenticated">
         <mat-icon aria-hidden="false" aria-label="Example home icon">grading</mat-icon>
 
         Recorded Tests</a>
 
 
-      <a mat-list-item [routerLink]="'/recorded-test-kit'" *ngIf="isManager">
+      <a mat-list-item [routerLink]="'/recorded-test-kit'" *ngIf="isManager&&userIsAuthenticated">
         <mat-icon aria-hidden="false" aria-label="Example home icon">view_module</mat-icon>
 
         Test Kit Stock</a>
 
-        <a mat-list-item [routerLink]="'/recorded-test-centre'" *ngIf="isManager">
+        <a mat-list-item [routerLink]="'/recorded-test-centre'" *ngIf="isManager&&userIsAuthenticated">
           <mat-icon aria-hidden="false" aria-label="Example home icon">local_hospital</mat-icon>
 
           Test Centre</a>
-        <a mat-list-item [routerLink]="'/test-history'" *ngIf="isPatient">
+        <a mat-list-item [routerLink]="'/test-history'" *ngIf="isPatient&&userIsAuthenticated">
           <mat-icon aria-hidden="false" aria-label="Example home icon">history</mat-icon>
 
           View Test History</a>
 
-          <a mat-list-item [routerLink]="'/generate-test-report'" *ngIf="isOfficer">
+          <a mat-list-item [routerLink]="'/generate-test-report'" *ngIf="isOfficer&&userIsAuthenticated">
             <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_down</mat-icon>
 
             Generate Test Report   </a>

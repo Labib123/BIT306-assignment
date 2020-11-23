@@ -29,7 +29,7 @@ app.use((req,res,next)=>{
 })
 
 //Tester
-app.post('/api/tester/signup',(req,res,next)=>{
+app.post('/api/tester/signup',checkAuth,(req,res,next)=>{
   bcrypt.hash(req.body.password, 10)
   .then(hash =>{
     const user = new User({
@@ -53,7 +53,7 @@ app.post('/api/tester/signup',(req,res,next)=>{
     });
   });
 });
-app.get('/api/tester',(req,res,next)=>{
+app.get('/api/tester',checkAuth,(req,res,next)=>{
 
     User.find().then(document => {
       res.status(200).json({
