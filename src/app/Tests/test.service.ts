@@ -26,7 +26,7 @@ export class TestService {
         error => {
           console.log(error);
         });
-
+        return this.tests;
   }
 
 

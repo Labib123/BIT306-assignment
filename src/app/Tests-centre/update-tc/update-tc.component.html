@@ -6,9 +6,9 @@
 
     <form #postForm="ngForm"  (submit)="onUpdateTest(postForm)" >
         <mat-form-field>
-            <input placeholder="Test Centre Name"  [value]="currentTest.name"  name="name" type="text" required  matInput >
-
+            <input placeholder="Test Centre Name"  [ngModel]="currentTest.name"  name="name" type="text" required  matInput ngModel>
         </mat-form-field>
+
         <input type="hidden" [value]="currentTest.id">
         <button   mat-raised-button color="primary" type="submit"> Save </button>
         <button (click)="onCancel()" mat-raised-button color="primary" > Cancel </button>

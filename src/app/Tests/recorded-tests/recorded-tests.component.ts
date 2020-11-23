@@ -30,7 +30,7 @@ export class RecordedTestsComponent implements AfterViewInit {
 
   constructor(private testsService: TestService, private dialog:MatDialog,private authService:AuthService) {
     console.log(authService.email)
-  //  this.dataSource = new MatTableDataSource( this.testsService.getTests());
+    //this.dataSource = new MatTableDataSource( this.testsService.getTests());
 
   }
 
@@ -50,18 +50,18 @@ export class RecordedTestsComponent implements AfterViewInit {
     this.dialog.open(UpdateTestComponent,dialogConfig) ;
 
 }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+  this.dataSource.sort = this.sort;
+}
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
   }
+}
 }
 

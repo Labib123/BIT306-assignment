@@ -102,7 +102,7 @@ app.put('/api/testsC/:id',checkAuth,(req,res,next)=>{
     _id:req.body.id,
     name:req.body.name
   });
-  testC.updateOne({_id: req.params.id}, testC).then(result => {
+  TestC.updateOne({_id: req.params.id}, testC).then(result => {
     console.log(result);
     res.status(200).json({message: "Update Successful!"});
   });
@@ -141,7 +141,7 @@ app.put('/api/testsK/:id',checkAuth,(req,res,next)=>{
     name:req.body.name,
     stock:req.body.stock
   });
-  testK.updateOne({_id: req.params.id}, testK).then(result => {
+  TestK.updateOne({_id: req.params.id}, testK).then(result => {
     console.log(result);
     res.status(200).json({message: "Update Successful!"});
   });

@@ -30,8 +30,8 @@ onUpdateTest(form:NgForm){
   if(form.invalid){
     return;
   }
-  this.testCService.updateTest(this.currentTest.id, this.currentTest.name)
-   this.dialogRef.close();
+  this.testCService.updateTest(this.currentTest.id, form.value.name)
+  this.dialogRef.close();
 }
 
   ngOnInit(): void {

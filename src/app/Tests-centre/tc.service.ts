@@ -60,13 +60,15 @@ export class TestCService {
     });
   }
   public updateTest(id,name){
-    const testC:TestC = {id:null,name:name};
+    const testC:TestC = {id:id,name:name};
     this.http.put('http://localhost:3000/api/testsC/'+ id, testC)
     .subscribe(response => {
       console.log(response);
+      console.log(testC);
       this.router.navigate(['/']);
     });
   }
+
   deleteTestC(id:String){
     this.http.delete('http://localhost:3000/api/testsC/'+id)
     .subscribe(() => {
