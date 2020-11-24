@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 export class AuthService{
   private token:string;
   public email:string ;
+  public userName:string = " ";
   public userType:string = "" ; 
   private authStatusListener = new Subject<boolean>();
 
@@ -45,6 +46,8 @@ export class AuthService{
       this.token= token;
       this.email = authData.email;
       this.userType = response.message.position ; 
+      this.userName = response.message.name ; 
+
 
       this.authStatusListener.next(true);
       this.router.navigate(['/']);

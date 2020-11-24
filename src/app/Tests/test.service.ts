@@ -4,7 +4,7 @@ import { HttpClientModule }  from '@angular/common/http';
 import { Subject } from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router'
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {AuthService} from '../auth.service';
 import { Observable } from 'rxjs';
 
@@ -15,25 +15,22 @@ export class TestService {
   private tests:Test[] = [] ;
   private postsUpdated = new Subject<Test[]>();
   constructor(private http: HttpClient,private router:Router,public authService:AuthService) {
+
   }
   private BACKEND_URL = "http://localhost:3000/api"
   private jsonObject = {};
 
-  public  getTests() {
-       //this.http.get<[]>("http://localhost:3000/api/tester/tests").subscribe(
-        //response => {
-        //this.tests =  response;
-
-        //},
-        //error => {
-          //console.log(error);
-        //});
-        //return this.tests;
-        this.http.get<{message: string, tests: any}>('http://localhost:3000/api/tester/tests')
+  public  getTests(id) {
+        let url = 'http://localhost:3000/api/tester/tests?testerId='+ id ; 
+        console.log(url);
+        this.http.get<{message: string, tests: any}>(url )
     .pipe(map((postData) => {
-      return postData.tests.map(tests => {
+      return postData.tests.map(tests => { //return http 
         return{
-          email:tests.email,
+          name:tests.name,
+          username:tests.testerId,
+          symptoms:tests.symptoms,
+          userId:tests.userId,
           date:tests.date,
           id:tests._id,
           patientType:tests.patientType,
@@ -47,18 +44,13 @@ export class TestService {
     })
     return this.tests;
   }
-  public  getTest(id):Test{
-    let currentPost ;
-      this.tests.forEach(function(tests){
-        if(tests.id === id) {
-          currentPost = tests;
-        }
-      })
-      return currentPost;
-    }
 
-  public addTest(testerId,date,status,userId,patientType,symptoms)  {
-    const testData = {testerId,symptoms:symptoms, date:date, status:status,userId:userId,patientType:patientType};
+  
+
+  
+
+  public addTest(name,testerId,date,status,userId,patientType,symptoms)  {
+    const testData = {name:name,testerId,symptoms:symptoms, date:date, status:status,userId:userId,patientType:patientType};
     console.log(testData)
     this.http.post('http://localhost:3000/api/tests/add', testData)
     .subscribe(response =>{
@@ -66,21 +58,45 @@ export class TestService {
     });
   }
 
-  public updateTest(id,username,password,name,patientType,symptoms,result){
-    this.tests.forEach(function(test){
-      if(test.id === id) {
-        test.username = username;
-        test.password = password;
-        test.name = name ;
-        test.patientType = patientType;
-        test.symptoms = symptoms ;
-        test.status = 'complete' ;
-        test.result = result;
-        test.resultDate = new Date() ;
+  public updateTest(id,username,name,patientType,symptoms,result){
+       const test = {
+         id:id,
+         userId :username,
+        name :name ,
+        patientType : patientType,
+        symptoms: symptoms ,
+        status:'completed',
+        result : result,
+        date :new Date()
       }
-    })
+      console.log(test);
+
+     this.http.put('http://localhost:3000/api/tests/update/'+ id, test).subscribe(response => {
+        console.log(response);
+        //console.log(test);
+        //this.router.navigate(['/']);
+      });
   }
 
+
+  public getPatientTest(id){
+    return  this.http.get("http://localhost:3000/api/patient/test?id="+id  )
+  
+  }
+
+
+  findTests(id){
+    return this.http.get("http://localhost:3000/api/tester/tests?testerId=" + id ); 
+}
+
+public  getSingleTest(id){
+   return this.http.get("http://localhost:3000/api/tests/findOne?=" + id )
+
+  }
+
+  public  getAllTests() {
+    return this.http.get("http://localhost:3000/api/tests")
+}
 
 }
 

@@ -5,6 +5,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Test} from "../test.model"
 import {TestService} from '../test.service' ; 
 import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {AuthService} from   '../../auth.service' ;
+
 /** Constants used to fill up our data base. */
 @Component({
   selector: 'app-test-history',
@@ -13,34 +15,35 @@ import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angula
 })
 export class TestHistoryComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'type','status','result'];
-  dataSource: MatTableDataSource<Test>;
+  public testsArray; 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private testsService: TestService, private dialog:MatDialog) {
-    // Create 100 users
-
-    // Assign the data to the data source for the table to render
-    //this.dataSource = new MatTableDataSource(testsService.getTests() );
-  }
-
-
-  ngOnInit(): void {
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  constructor(private authService:AuthService,private testsService: TestService, private dialog:MatDialog) {
+  
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    // const filterValue = (event.target as HTMLInputElement).value;
+   //  this.dataSource.filter = filterValue.trim().toLowerCase();
+   
+    
+   }
+  ngOnInit() {
+    this.initializeTable();
   }
+  initializeTable() {
+    this.testsService.getPatientTest(this.authService.email).subscribe((response: any) => {
+      console.log("response", response);
+      this.testsArray = new MatTableDataSource(response.tests)
+    });
+
+}
+  ngAfterViewInit() {
+    this.initializeTable();
+
+  }
+
 }
 

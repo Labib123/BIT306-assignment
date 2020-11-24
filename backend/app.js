@@ -28,6 +28,10 @@ app.use((req,res,next)=>{
   next();
 })
 
+
+
+
+
 //Tester
 app.post('/api/tester/signup',checkAuth,(req,res,next)=>{
   bcrypt.hash(req.body.password, 10)
@@ -53,7 +57,7 @@ app.post('/api/tester/signup',checkAuth,(req,res,next)=>{
     });
   });
 });
-app.get('/api/tester',checkAuth,(req,res,next)=>{
+app.get('/api/tester',(req,res,next)=>{
 
     User.find({position: 'tester'}).then(document => {
       res.status(200).json({
@@ -63,7 +67,9 @@ app.get('/api/tester',checkAuth,(req,res,next)=>{
     });
 
 });
-app.delete('/api/tester/:id',checkAuth,(req,res,next)=>{
+
+
+app.delete('/api/tester/:id',(req,res,next)=>{
   User.deleteOne({_id:req.params.id}).then(result => {
     console.log(result);
     res.status(200).json({message:"Tester Deleted!"});
@@ -71,7 +77,7 @@ app.delete('/api/tester/:id',checkAuth,(req,res,next)=>{
 });
 
 //TestCentre
-app.post('/api/testsC',checkAuth,(req,res,next)=>{
+app.post('/api/testsC',(req,res,next)=>{
   //const testK  = req.body;
   const testC  = new TestC({
     name: req.body.name
@@ -215,12 +221,15 @@ app.listen(port, () => {
 
 app.post("/api/tests/add",(req, res, next) => {
   const test = new Test({
+    name:req.body.name,
     testerId: req.body.testerId,
       date: req.body.date,
       status: "pending",
       userId: req.body.userId,
       patientType: req.body.patientType,
       symptoms: req.body.symptoms,
+      result: "pendind",
+
   })
   test.save().
       then(test => {
@@ -237,27 +246,18 @@ app.post("/api/tests/add",(req, res, next) => {
 
 
 app.get("/api/patient/test",(req, res, next) => {
-  Test.find({userId: req.query.userId}, function(err, tests) {
-    var testMap = {};
-
-    tests.forEach(function(test) {
-      testMap[test._id] = test;
+    console.log(req.query.id);  
+  Test.find({userId: req.query.id}).then(document => {
+    res.status(200).json({
+      message: 'Test fetched successfully',
+      tests:document
     });
-
-    res.send(testMap);
   });
 })
 
+
 app.get("/api/tester/tests",(req, res, next) => {
-  //Test.find({testerId: req.query.testerId}, function(err, tests) {
-    //var testMap = {};
-
-    //tests.forEach(function(test) {
-      //testMap[test._id] = test;
-    //});
-
-    //res.send(testMap);
-  //});
+ 
   Test.find({testerId: req.query.testerId}).then(document => {
     res.status(200).json({
       message: 'Test fetched successfully',
@@ -267,16 +267,42 @@ app.get("/api/tester/tests",(req, res, next) => {
 })
 
 app.get("/api/tests",(req, res, next) => {
-  Test.find({}, function(err, tests) {
-    var testMap = {};
-
-    tests.forEach(function(test) {
-      testMap[test._id] = test;
+  Test.find({}).then(document => {
+    res.status(200).json({
+      message: 'Test fetched successfully',
+      tests:document
     });
-
-    res.send(testMap);
   });
 })
+
+app.get("/api/tests/findOne",(req, res, next) => {
+  Test.findOne({_id: req.query.id}).then(document => {
+    res.status(200).json({
+      message: 'Test fetched successfully',
+      tests:document
+    });
+  });
+})
+
+
+app.put('/api/tests/update/:id',(req,res,next)=>{
+  const test = new Test({
+    _id:req.body.id,
+    name:req.body.name,
+    testerId:req.body.testerId,
+    date: req.body.date, 
+    status: "Completed",
+    userId: req.body.userId, 
+    patientType:req.body.patientType,
+    symptoms: req.body.symptoms,
+    result: req.body.result
+  });
+  Test.updateOne({_id: req.params.id}, test).then(result => {
+    console.log(result);
+    res.status(200).json({message: "Update Successful!"});
+  });
+});
+
 
 app.get("/api/testing",(req, res, next) => {
 

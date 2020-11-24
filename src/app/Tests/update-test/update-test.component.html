@@ -6,7 +6,7 @@
 
     <form #postForm="ngForm"  (submit)="onUpdateTest(postForm)" >
         <mat-form-field>
-            <input [value]="currentTest.username" placeholder="Username" required  name="username"  matInput type="text"  >
+            <input [value]="currentTest.userId" placeholder="Username" required  name="username"  matInput type="text"  >
        
         </mat-form-field>
 
@@ -16,14 +16,14 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input placeholder="Patient Name"  [value]="currentTest.name"  name="name" type="text" required  matInput >
+            <input placeholder="Patient Name" [(ngModel)]="patientName" [value]="currentTest.name"  name="name" type="text" required  matInput >
        
         </mat-form-field>
 
         <mat-form-field>
             <mat-label  >Patient Type</mat-label>
             <mat-select required  [(ngModel)]="selectedType" name="type" matInput>
-                <mat-option  value="returnee">Returnee</mat-option>
+                <mat-option value="returnee">Returnee</mat-option>
                 <mat-option value="quarantined">Quarantined</mat-option>
                 <mat-option value="close-contact">Close contact</mat-option>
                 <mat-option value="infected">Infected</mat-option>
@@ -35,7 +35,7 @@
        
 
         <mat-form-field style="width:100%">
-            <textarea [value]="currentTest.symptoms" placeholder="Symptoms" required   matInput  name="symptoms"rows="6"  ></textarea>
+            <textarea [(ngModel)]="symptoms" [value]="currentTest.symptoms" placeholder="Symptoms" required   matInput  name="symptoms"rows="6"  ></textarea>
         </mat-form-field>
 
         <mat-form-field>

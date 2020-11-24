@@ -5,7 +5,6 @@ import {RecordedTestsComponent} from '../recorded-tests/recorded-tests.component
 import {Test} from "../test.model"
 import {TestService} from '../test.service' ;
 import {AuthService} from '../../../app/auth.service';
-
 @Component({
   selector: 'app-record-new-test',
   templateUrl: './record-new-test.component.html',
@@ -22,8 +21,9 @@ export class RecordNewTestComponent implements OnInit {
     }
 
     this.authService.createUser(form.value.name,form.value.email, form.value.password, "Patient");
-    this.testService.addTest(this.authService.email,new Date(),"pending",form.value.email,form.value.type,form.value.symptoms, )
+    this.testService.addTest(form.value.name,this.authService.email,new Date(),"pending",form.value.email,form.value.type,form.value.symptoms, )
     this.dialogRef.close();
+
 
   }
   ngOnInit(): void {

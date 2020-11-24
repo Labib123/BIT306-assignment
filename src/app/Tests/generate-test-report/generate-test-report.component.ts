@@ -6,6 +6,7 @@ import {Test} from "../test.model"
 import {TestService} from '../test.service' ;
 import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
+import {AuthService} from   '../../auth.service' ;
 
 @Component({
   selector: 'app-generate-test-report',
@@ -14,35 +15,36 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class GenerateTestReportComponent implements  AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'type','status','activity'];
-  dataSource: MatTableDataSource<Test>;
   fileUrl;
+  public testsArray; 
+
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
-    const data = 'some text';
-    const blob = new Blob([data], { type: 'application/octet-stream' });
-
-    this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
+    this.initializeTable();
   }
-  constructor(private testsService: TestService, private dialog:MatDialog,private sanitizer: DomSanitizer) {
-    // Create 100 users
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(testsService.getTests() );
+  initializeTable() {
+        this.testsService.getAllTests().subscribe((response: any) => {
+          console.log("response", response);
+          this.testsArray = new MatTableDataSource(response.tests)
+        });
+
+  }
+  constructor(private authService:AuthService,private testsService: TestService, private dialog:MatDialog,private sanitizer: DomSanitizer) {
+
   }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+   this.initializeTable();
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+    // const filterValue = (event.target as HTMLInputElement).value;
+   //  this.dataSource.filter = filterValue.trim().toLowerCase();
+   
+    
+   }
+  
 }
