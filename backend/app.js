@@ -33,6 +33,7 @@ app.use((req,res,next)=>{
 
 
 //Tester
+//adding new tester data from database
 app.post('/api/tester/signup',checkAuth,(req,res,next)=>{
   bcrypt.hash(req.body.password, 10)
   .then(hash =>{
@@ -57,6 +58,7 @@ app.post('/api/tester/signup',checkAuth,(req,res,next)=>{
     });
   });
 });
+//getting tester data from database
 app.get('/api/tester',(req,res,next)=>{
 
     User.find({position: 'tester'}).then(document => {
@@ -68,7 +70,7 @@ app.get('/api/tester',(req,res,next)=>{
 
 });
 
-
+//delete tester data from database
 app.delete('/api/tester/:id',(req,res,next)=>{
   User.deleteOne({_id:req.params.id}).then(result => {
     console.log(result);
@@ -77,6 +79,7 @@ app.delete('/api/tester/:id',(req,res,next)=>{
 });
 
 //TestCentre
+//adding new Test Centre
 app.post('/api/testsC',(req,res,next)=>{
   //const testK  = req.body;
   const testC  = new TestC({
@@ -88,7 +91,7 @@ app.post('/api/testsC',(req,res,next)=>{
     message: 'Test Centre Added successfully'
   });
 });
-
+//getting the data from database
 app.get('/api/testsC',(req,res,next)=>{
   TestC.find().then(document => {
     res.status(200).json({
@@ -97,12 +100,14 @@ app.get('/api/testsC',(req,res,next)=>{
     });
   });
 });
+//delete particular test centre data from database
 app.delete('/api/testsC/:id',checkAuth,(req,res,next)=>{
   TestC.deleteOne({_id:req.params.id}).then(result => {
     console.log(result);
     res.status(200).json({message:"Test Centre Deleted!"});
   })
 });
+//update particular test centre data from database
 app.put('/api/testsC/:id',checkAuth,(req,res,next)=>{
   const testC = new TestC({
     _id:req.body.id,
@@ -115,6 +120,7 @@ app.put('/api/testsC/:id',checkAuth,(req,res,next)=>{
 });
 
 //TestKit
+//add a new testkit data to database
 app.post('/api/testsK',checkAuth,(req,res,next)=>{
   //const testK  = req.body;
   const testK  = new TestK({
@@ -127,6 +133,7 @@ app.post('/api/testsK',checkAuth,(req,res,next)=>{
     message: 'Test Kit Added successfully'
   });
 });
+//getting testkit data from database
 app.get('/api/testsK',(req,res,next)=>{
   TestK.find().then(document => {
     res.status(200).json({
@@ -135,12 +142,14 @@ app.get('/api/testsK',(req,res,next)=>{
     });
   });
 });
+//delete testkit data from database
 app.delete('/api/testsK/:id',checkAuth,(req,res,next)=>{
   TestK.deleteOne({_id:req.params.id}).then(result => {
     console.log(result);
     res.status(200).json({message:"Test Kit Deleted!"});
   })
 });
+//update testkit data from database
 app.put('/api/testsK/:id',checkAuth,(req,res,next)=>{
   const testK = new TestK({
     _id:req.body.id,
@@ -246,7 +255,7 @@ app.post("/api/tests/add",(req, res, next) => {
 
 
 app.get("/api/patient/test",(req, res, next) => {
-    console.log(req.query.id);  
+    console.log(req.query.id);
   Test.find({userId: req.query.id}).then(document => {
     res.status(200).json({
       message: 'Test fetched successfully',
@@ -257,7 +266,7 @@ app.get("/api/patient/test",(req, res, next) => {
 
 
 app.get("/api/tester/tests",(req, res, next) => {
- 
+
   Test.find({testerId: req.query.testerId}).then(document => {
     res.status(200).json({
       message: 'Test fetched successfully',
@@ -290,9 +299,9 @@ app.put('/api/tests/update/:id',(req,res,next)=>{
     _id:req.body.id,
     name:req.body.name,
     testerId:req.body.testerId,
-    date: req.body.date, 
+    date: req.body.date,
     status: "Completed",
-    userId: req.body.userId, 
+    userId: req.body.userId,
     patientType:req.body.patientType,
     symptoms: req.body.symptoms,
     result: req.body.result

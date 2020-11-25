@@ -50,19 +50,23 @@ export class TesterService {
         })
         return currentPost;
     }
+    findtester(){
+      return this.http.get<{message: string, tester: any}>('http://localhost:3000/api/tester');
+    }
   public addTester(name,email,password,position,testCentre)  {
     const tester:Tester = {id:null,name:name,email:email, password:password, position:position, testCentre:testCentre};
     this.http.post('http://localhost:3000/api/tester/signup', tester)
       .subscribe(response =>{
         console.log(response);
       });
+      this.router.navigate(['/']);
   }
   deleteTester(id:String){
     this.http.delete('http://localhost:3000/api/tester/'+id)
     .subscribe(() => {
       console.log("Tester Deleted!");
     });
-    this.router.navigate(['/']);
+    //this.router.navigate(['/']);
   }
 
 

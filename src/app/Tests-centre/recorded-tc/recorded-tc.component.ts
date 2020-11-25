@@ -8,7 +8,7 @@ import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angula
 import {RecordNewTestCentreComponent} from '../record-new-tc/record-new-tc.component';
 import {UpdateTestCentreComponent} from '../update-tc/update-tc.component';
 import {AddTesterComponent} from '../add-tester/add-tester.component';
-
+import {TesterService} from "../tester.service";
 
 @Component({
   selector: 'app-main-tc',
@@ -21,12 +21,21 @@ export class RecordedTestCentreComponent implements AfterViewInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private testsCService: TestCService, private dialog:MatDialog) {
+  constructor(private testsCService: TestCService, private dialog:MatDialog,private testerService: TesterService) {
     // Create 100 users
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(testsCService.getTests() );
+    //this.dataSource = new MatTableDataSource(testsCService.getTests() );
   }
+  ngOnInit() {
+    this.initializeTable();
+  }
+  initializeTable() {
+    this.testsCService.findtc().subscribe((response: any) => {
+      console.log("response", response);
+      this.dataSource = new MatTableDataSource(response.testsC)
+    });
+}
 
   onRecord(){
       let dialogConfig = new MatDialogConfig() ;
@@ -41,9 +50,13 @@ export class RecordedTestCentreComponent implements AfterViewInit{
     dialogConfig.autoFocus = true;
     dialogConfig.data= {id:id} ;
     this.dialog.open(UpdateTestCentreComponent,dialogConfig) ;
+    this.dialog._getAfterAllClosed().subscribe(() => {
+      this.initializeTable();
+    });
 }
 onDeleteTc(id: String){
   this.testsCService.deleteTestC(id);
+  this.initializeTable();
 }
 onAddTester(id){
   let dialogConfig = new MatDialogConfig() ;
@@ -53,17 +66,18 @@ onAddTester(id){
   this.dialog.open(AddTesterComponent,dialogConfig) ;
 }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    //this.dataSource.paginator = this.paginator;
+    //this.dataSource.sort = this.sort;
+    this.initializeTable();
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    //if (this.dataSource.paginator) {
+     // this.dataSource.paginator.firstPage();
+    //}
   }
 
 

@@ -6,7 +6,7 @@
 
     <form #postForm="ngForm"  (submit)="onUpdateTest(postForm)" >
         <mat-form-field>
-            <input placeholder="Test Centre Name"  [ngModel]="currentTest.name"  name="name" type="text" required  matInput ngModel>
+            <input placeholder="Test Centre Name"  [ngModel]="TestCname"  name="name" type="text" required  matInput ngModel>
         </mat-form-field>
 
         <input type="hidden" [value]="currentTest.id">

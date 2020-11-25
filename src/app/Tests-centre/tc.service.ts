@@ -48,6 +48,9 @@ export class TestCService {
         })
         return currentPost;
     }
+    findtc(){
+      return this.http.get<{message: string, testsC: any}>('http://localhost:3000/api/testsC');
+    }
   public addTest(name)  {
     const testC:TestC = {id:null,name:name};
     this.http
@@ -56,7 +59,7 @@ export class TestCService {
       console.log(responseData.message);
       this.testsC.push(testC);
       this.postsUpdated.next([...this.testsC]);
-      this.router.navigate(['/']);
+      //this.router.navigate(['/']);
     });
   }
   public updateTest(id,name){
@@ -65,7 +68,7 @@ export class TestCService {
     .subscribe(response => {
       console.log(response);
       console.log(testC);
-      this.router.navigate(['/']);
+
     });
   }
 

@@ -13,24 +13,30 @@ import {UpdateTestkitComponent} from '../update-testkit/update-testkit.component
   styleUrls: ['./recorded-testkit.component.css']
 })
 export class RecordedTestkitComponent implements AfterViewInit{
+  public testsKArray;
   displayedColumns: string[] = ['name', 'stock','activity'];
   dataSource: MatTableDataSource<TestK>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private testsKService: TestKService, private dialog:MatDialog) {
-    // Create 100 users
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(testsKService.getTests());
   }
+  ngOnInit() {
+    this.initializeTable();
+  }
+  initializeTable() {
+    this.testsKService.findtestkit().subscribe((response: any) => {
+      console.log("response", response);
+      this.testsKArray = new MatTableDataSource(response.testsK)
+    });
 
+}
   onRecord(){
       let dialogConfig = new MatDialogConfig() ;
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      this.dialog.open(RecordNewTestkitComponent,dialogConfig) ;
-
+      this.dialog.open(RecordNewTestkitComponent,dialogConfig);
   }
 
   onUpdate(id){
@@ -39,24 +45,30 @@ export class RecordedTestkitComponent implements AfterViewInit{
     dialogConfig.autoFocus = true;
     dialogConfig.data= {id:id} ;
     this.dialog.open(UpdateTestkitComponent,dialogConfig) ;
+    this.dialog._getAfterAllClosed().subscribe(() => {
+      this.initializeTable();
+    });
+
 
 }
   onDelete(id: String){
     this.testsKService.deleteTestK(id);
+    this.initializeTable();
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    this.initializeTable();
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
   }
 }
 

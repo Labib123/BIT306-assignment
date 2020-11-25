@@ -19,21 +19,11 @@ export class TestKService {
   }
 
   getTests(){
-    this.http.get<{message: string, testsK: any}>('http://localhost:3000/api/testsK')
-    .pipe(map((postData) => {
-      return postData.testsK.map(testK => {
-        return{
-          name:testK.name,
-          stock:testK.stock,
-          id:testK._id
-        };
-      });
-    }))
-    .subscribe(transformedPosts =>{
-      this.testsK = transformedPosts;
-      this.postsUpdated.next([...this.testsK]);
-    })
-    return this.testsK;
+  return  this.http.get<{message: string, testsK: any}>('http://localhost:3000/api/testsK')
+
+  }
+  findtestkit(){
+    return this.http.get<{message: string, testsK: any}>('http://localhost:3000/api/testsK');
   }
   getPostUpdateListener(){
     return this.postsUpdated.asObservable();
@@ -58,7 +48,7 @@ export class TestKService {
       console.log(responseData.message);
       this.testsK.push(testK);
       this.postsUpdated.next([...this.testsK]);
-      this.router.navigate(['/']);
+      //this.router.navigate(['/']);
     });
   }
   public updateTest(id,name,stock){
@@ -67,7 +57,7 @@ export class TestKService {
     .subscribe(response => {
       console.log(response);
       console.log(testK);
-      this.router.navigate(['/']);
+    //  this.router.navigate(['/']);
     });
   }
   deleteTestK(id:String){

@@ -13,16 +13,35 @@ import { Inject } from '@angular/core';
 })
 export class UpdateTestkitComponent implements OnInit {
   id ;
-  currentTest:TestK;
+  currentTestKit;
+  public testKitArray;
 
   testResult;
+  TestKitname;
+  TestKitstock;
   selectedType;
   constructor(   private dialogRef: MatDialogRef<TestK>,  @Inject(MAT_DIALOG_DATA) data,private testService: TestKService ) {
     this.id = data.id;
-    this.currentTest= this.testService.getTest(this.id);
+    this.onInitialize();
 }
 
 
+onInitialize(){
+  this.testService.getTests().subscribe((response: any) => {
+
+    this.testKitArray = response.testsK;
+    this.testKitArray.forEach( (element) => {
+      if(element._id == this.id){
+        this.currentTestKit = element;
+        this.TestKitname = this.currentTestKit.name
+        this.TestKitstock = this.currentTestKit.stock
+        console.log(this.currentTestKit.name)
+      }
+  });
+
+
+  }); ;
+}
 
 onCancel(){
   this.dialogRef.close()
@@ -33,13 +52,15 @@ onUpdateTest(form:NgForm){
   if(form.invalid){
     return;
   }
-  this.testService.updateTest(this.currentTest.id, form.value.name,form.value.stock)
+  this.testService.updateTest(this.currentTestKit._id, form.value.name,form.value.stock)
    this.dialogRef.close();
 }
 
 
 
   ngOnInit(): void {
+    this.onInitialize();
+
   }
 
 }

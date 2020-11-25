@@ -15,8 +15,9 @@ export class AddTesterComponent implements OnInit {
 
 
   id ;
-  currentTest:TestC;
-
+  currentTest;
+  public testCArray;
+  public TestCname;
   testResult;
   selectedType;
   constructor( private dialogRef: MatDialogRef<TestC>,  @Inject(MAT_DIALOG_DATA) data,private testCService: TestCService,private testerService: TesterService ) {
@@ -41,6 +42,21 @@ public onAddTester(form:NgForm){
 }
 
   ngOnInit(): void {
+    this.onInitialize();
   }
+  onInitialize(){
+    this.testCService.findtc().subscribe((response: any) => {
 
+      this.testCArray = response.testsC;
+      this.testCArray.forEach( (element) => {
+        if(element._id == this.id){
+          this.currentTest = element;
+          this.TestCname = this.currentTest.name
+          console.log(this.currentTest.name)
+        }
+    });
+
+
+    }); ;
+  }
 }
